@@ -30,16 +30,23 @@
   <script src="js/plugins.js"></script>
 
   <script src="js/main.js"></script>
+  <script src="js/resize.js"></script>
 
-<!--
   <script type="text/javascript">
     $(document).ready(function () {
-      $('h1').splitting('chars');
+      $('p').css('font-size', fontSize + 'px');
+      $('p').css('line-heighte', lineHeight + 'em');
+
+      $('p').splitting('line');
+      $('h1').splitting('words');
+      $('h3').splitting('chars');
+    });
+
+    $(window).on('resize', function() {
+      $('p').splitting('inline').splitting('line');
     });
   </script>
--->
 
-<script src="js/lining.js"></script>
 
   <!-- Google Analytics: change UA-XXXXX-Y to be your site's ID. -->
   <script>
