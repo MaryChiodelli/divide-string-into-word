@@ -34,16 +34,12 @@
 
   <script type="text/javascript">
     $(document).ready(function () {
-      $('p').css('font-size', fontSize + 'px');
-      $('p').css('line-heighte', lineHeight + 'em');
-
-      $('p').splitting('line');
-      $('h1').splitting('words');
-      $('h3').splitting('chars');
+      $('p').splittype('lines');
     });
 
     $(window).on('resize', function() {
-      $('p').splitting('inline').splitting('line');
+      $('h1').fluidtype();
+      $('p').splittype('lines');
     });
   </script>
 

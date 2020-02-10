@@ -79,16 +79,16 @@ printSpan($('h3'), '', 'char', '');
 
 (function ($) {
 
-  function printTextSpanned (text, splitItem, spanClass, after) {
-    const itemsArray = text.text().split(splitItem);
-    let span = '';
-    if (itemsArray.length) {
-      $(itemsArray).each(function(index, element){
-        span += `<span class="text-${spanClass}">${element}</span>${after}`;
+  function printSpan( text, splitter, className, space ) {
+    var splittedText = text.text().split(splitter);
+    var html = '';
+    if (splittedText.length) {
+      $(splittedText).each(function (index, element) {
+        html += '<span class="' + className + '">' + element + '</span>' + space;
       });
-      text.empty().append(span);
     }
-  };
+    return html;
+  }
 
 /*
   function printLine(text, spanClass, after) {
@@ -105,67 +105,51 @@ printSpan($('h3'), '', 'char', '');
   };
 */
 
-  const methods = {
-    line: function () {
-      return this.each(function () {
-        printTextSpanned($(this), ' ', 'word', ' ');
-        const wordsSpan = document.querySelectorAll('p span');
-        let collection = [];
-        let lastY = 0;
-        let span = '';
-        let counter = 1;
-        $(wordsSpan).each(function (index) {
-          const y = $(this).offset().top;
-          if (y !== lastY && index !== 0) {
-            span += `<span class="text-line-${counter}">${collection.join('')}</span>`;
-            collection = [];
-            counter++;
-          }
-          collection.push($(this).html() + " ");
-          if (index === wordsSpan.length - 1) {
-            span += `<span class="text-line-${counter}">${collection.join('')}</span>`;
-          }
-          return lastY = y;
-        });
-        $('p').empty().append(span);
-      })
-    },
+  var methods = {
 
-    inline: function () {
-      return this.each(function () {
-        const lineSpan = document.querySelectorAll('p span');
-        let span = '';
-        if (lineSpan.length) {
-          $(lineSpan).each(function () {
-            span += $(this).html();
-          });
-          $('p').empty().append(span);
-        }
-        return this;
-      })
-    },
-
-    words: function () {
-      return this.each(function () {
-        printTextSpanned($(this), ' ', 'word', ' ');
-      })
-    },
     chars: function () {
       return this.each(function () {
-        printTextSpanned($(this), '', 'char', '');
-      })
+        $(this).html( printSpan( $(this), '', 'char', '' ) );
+      });
+    },
+    words: function () {
+      return this.each(function () {
+        $(this).html( printSpan( $(this), ' ', 'word', ' ' ) );
+      });
+    },
+    lines: function () {
+      return this.each(function () {
+        $(this).html( printSpan( $(this), ' ', 'word', ' ' ) );
+
+        var itemsClassWord = document.querySelectorAll('span.word');
+        var top = 0;
+        var arr = [];
+        var html = '';
+
+        $(itemsClassWord).each(function (index) {
+          var y = $(this).offset().top;
+          if (y !== top && index !== 0) {
+            html += '<span class="line">' + arr.join('') + '</span>';
+            arr = [];
+          }
+          arr.push( $(this).html() + ' ' );
+          if (index === itemsClassWord.length - 1) {
+            html += '<span class="line">' + arr.join('') + '</span>';
+          }
+          return top = y;
+        });
+        $(this).html(html)
+      });
     }
 
-  };
+  }
 
-  $.fn.splitting = function (method) {
-    if (method && methods[method]) {
-      return methods[method].apply(this, [].slice.call(arguments, 1));
-    } else if (method === 'split' || !method) {
-      return methods.words.apply(this, [].slice.call(arguments, 0));
+  $.fn.splittype = function (options) {
+    if ( methods[options] ) {
+      return methods[options].apply(this, [].slice.call(arguments, 1));
+    } else {
+      $.error( 'Method ' +  options + ' does not exist on jannounce' );
     }
-    $.error(`Method ${method} does not exist on jQuery.splitting`);
-    return this;
   }
 
 })(jQuery);
