@@ -100,9 +100,26 @@ textarea {
    Author's custom styles
    ========================================================================== */
 
-.container {
-  width: 80%;
-  margin: 10% auto;
+body { margin: 0 }
+img { max-width: 100% }
+svg { max-height: 100% }
+
+html {
+  font-size: 16px;
+  font-family: 'Roboto';
+  font-weight: 400;
+}
+
+div header {
+  color: blue;
+}
+
+#splittype-chars .example-render {
+  border: 1px solid #fafafa;
+}
+
+span.selector {
+  color: blue;
 }
 
 /* ==========================================================================

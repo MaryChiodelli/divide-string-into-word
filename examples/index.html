@@ -1,0 +1,83 @@
+<!doctype html>
+<html class="no-js" lang="">
+
+<head>
+  <meta charset="utf-8">
+  <title></title>
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link rel="manifest" href="site.webmanifest">
+  <link rel="apple-touch-icon" href="icon.png">
+  <!-- Place favicon.ico in the root directory -->
+
+  <link rel="stylesheet" href="css/normalize.css">
+  <link href="https://unpkg.com/basscss@8.0.2/css/basscss.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="main.css">
+
+  <meta name="theme-color" content="#fafafa">
+</head>
+
+<body>
+  <div class="px3">
+    <header class="py2">
+      <h1 class="m0">SPLITTING</h1>
+      <p>A jQuery collection of plugin for work with typography</p>
+    </header>
+    <section id="splittype-chars" class="py2">
+      <h2 class="h1">Chars</h2>
+      <p>This parameter let to divide texts into his chars.</p>
+      <p>The <span class="selector">.char</span> selector can be used to select chars elements.</p>
+      <div class="chars-example-render p2">
+        <p>Bacon ipsum dolor sit amet chuck prosciutto landjaeger ham hock filet mignon shoulder hamburger pig venison.</p>
+      </div>
+    </section>
+    <section id="splittype-words" class="py2">
+      <h2 class="h1">Words</h2>
+      <p>This parameter let to divide texts into his words.</p>
+      <p>The <span class="selector">.word</span> selector can be used to select words elements.</p>
+      <div class="words-example-render p2">
+        <p>Bacon ipsum dolor sit amet chuck prosciutto landjaeger ham hock filet mignon shoulder hamburger pig venison.</p>
+      </div>
+    </section>
+    <section id="splittype-lines" class="py2">
+      <h2 class="h1">Lines</h2>
+      <p>This parameter let to divide texts into his lines.</p>
+      <p>The <span class="selector">.line</span> selector can be used to select chars elements.</p>
+      <div class="lines-example-render p2">
+        <p>Bacon ipsum dolor sit amet chuck prosciutto landjaeger ham hock filet mignon shoulder hamburger pig venison.</p>
+      </div>
+    </section>
+  </div>
+
+  <script src="js/vendor/modernizr-3.7.1.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+  <script>window.jQuery || document.write('<script src="js/vendor/jquery-3.4.1.min.js"><\/script>')</script>
+  <script src="js/plugins.js"></script>
+
+  <script src="../src/splittype.js"></script>
+  <script src="../src/fluidtype.js"></script>
+
+  <script type="text/javascript">
+    $(document).ready(function () {
+      $('header h1').fluidtype();
+      $('.chars-example-render p').splittype('chars');
+      $('.words-example-render p').splittype('words');
+      $('.lines-example-render p').splittype('lines');
+    });
+
+    $(window).on('resize', function() {
+      $('header h1').fluidtype();
+    });
+  </script>
+
+
+  <!-- Google Analytics: change UA-XXXXX-Y to be your site's ID. -->
+  <script>
+    window.ga = function () { ga.q.push(arguments) }; ga.q = []; ga.l = +new Date;
+    ga('create', 'UA-XXXXX-Y', 'auto'); ga('set','transport','beacon'); ga('send', 'pageview')
+  </script>
+  <script src="https://www.google-analytics.com/analytics.js" async></script>
+</body>
+
+</html>
